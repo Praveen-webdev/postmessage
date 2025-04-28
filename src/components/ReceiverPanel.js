@@ -12,7 +12,10 @@ const ReceiverPanel = () => {
     if (typeof data === "object" && data.type?.startsWith("webpack")) {
       return;
     }
-    if (typeof data === "string" && data.startsWith("webpack")) {
+    if (
+      typeof data === "string" &&
+      (data.startsWith("webpack") || data.includes("setImmediate"))
+    ) {
       return;
     }
 

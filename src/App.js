@@ -26,6 +26,9 @@ function App() {
               const message = document.createElement('div');
               message.textContent = 'Received: ' + JSON.stringify(event.data);
               logDiv.appendChild(message);
+
+              // Respond to the sender
+              event.source.postMessage({ type: 'response', content: 'Message received in popup!' }, event.origin);
             });
           </script>
         `);
@@ -51,6 +54,10 @@ function App() {
               const message = document.createElement('div');
               message.textContent = 'Received: ' + JSON.stringify(event.data);
               logDiv.appendChild(message);
+
+
+              // Respond to the sender
+              event.source.postMessage({ type: 'response', content: 'Message received in iframe!' }, event.origin);
             });
           </script>
         `;
@@ -87,7 +94,9 @@ function App() {
           value={receiverUrl}
           onChange={(e) => setReceiverUrl(e.target.value)}
         />
-        <button className="secondary-button" onClick={createReceiver}>Create Receiver</button>
+        <button className="secondary-button" onClick={createReceiver}>
+          Create Receiver
+        </button>
       </div>
       <div className="panels">
         <SenderPanel receiverRef={receiverRef} />
